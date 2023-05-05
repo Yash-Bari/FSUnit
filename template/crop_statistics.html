@@ -1,0 +1,49 @@
+{% extends 'base1.html' %}
+<!DOCTYPE html>
+<html>
+<head>
+  <title>{% block title %}Crop Statistics{% endblock %}</title>
+  <style>
+    table {
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    td, th {
+      border: 1px solid #dddddd;
+      text-align: left;
+      padding: 8px;
+    }
+
+    tr:nth-child(even) {
+      background-color: #dddddd;
+    }
+  </style>
+</head>
+<body>
+  <h1>Crop Statistics</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>State</th>
+        <th>Crop</th>
+        <th>Count</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for state, crop_count in crop_statistics.items %}
+        {% for crop, count in crop_count.items %}
+          <tr>
+            {% if forloop.first %}
+              <td rowspan="{{ forloop.parentloop.counter }}">{{ state }}</td>
+            {% endif %}
+            <td>{{ crop }}</td>
+            <td>{{ count }}</td>
+          </tr>
+        {% endfor %}
+      {% endfor %}
+    </tbody>
+  </table>
+</body>
+</html>

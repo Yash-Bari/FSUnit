@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+  <h1>Crop Statistics</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>State</th>
+        <th>Crop</th>
+        <th>Count</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% if crop_data %}
+        {% for state, crops in crop_data.items %}
+          {% for crop, count in crops.items %}
+            <tr>
+              {% if forloop.first %}
+                <td rowspan="{{ crops|length }}">{{ state }}</td>
+              {% endif %}
+              <td>{{ crop }}</td>
+              <td>{{ count }}</td>
+            </tr>
+          {% endfor %}
+        {% endfor %}
+      {% else %}
+        <tr>
+          <td colspan="3">No crop statistics available.</td>
+        </tr>
+      {% endif %}
+    </tbody>
+  </table>
+{% endblock %}
+{% block extra_css %}
+
+  <style>
+    table {
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    td, th {
+      border: 1px solid #dddddd;
+      text-align: left;
+      padding: 8px;
+    }
+
+    tr:nth-child(even) {
+      background-color: #dddddd;
+    }
+  </style>
+{% endblock %}

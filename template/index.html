@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="container">
+    <h1 class="text-center my-5">List of Crops</h1>
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <table class="table table-hover">
+          <thead>
+            <tr class="table-dark">
+              <th>Name of Crop</th>
+              <th>State</th>
+              <th>Sowing Date</th>
+              <th>Area of Land (hectares)</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for crop in crops %}
+              <tr>
+                <td>{{ crop.name }}</td>
+                <td>{{ crop.state }}</td>
+                <td>{{ crop.sowing_date }}</td>
+                <td>{{ crop.area }}</td>
+                <td><a href="{% url 'crop_detail' crop.id %}" class="btn btn-primary">View Details</a></td>
+              </tr>
+            {% empty %}
+              <tr>
+                <td colspan="5" class="text-center">No crops added yet.</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        <a href="{% url 'add_crop' %}" class="btn btn-success">Add Crop</a>
+      </div>
+    </div>
+    <p><a href="{% url 'crop_statistics' %}">Crop Statistics</a></p>
+  </div>
+{% endblock %}

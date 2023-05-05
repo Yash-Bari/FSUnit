@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Crops</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Name of Farmer</th>
+        <th>State</th>
+        <th>Sowing Date</th>
+        <th>Area of Land</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for crop in crops %}
+        <tr>
+          <td>{{ crop.name }}</td>
+          <td>{{ crop.state }}</td>
+          <td>{{ crop.sowing_date }}</td>
+          <td>{{ crop.area }}</td>
+          <td><a href="{% url 'crop_detail' crop.id %}">View Details</a></td>
+        </tr>
+      {% empty %}
+        <tr>
+          <td colspan="5">No crops added yet.</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <p><a href="{% url 'add_crop' %}">Add Crop</a></p>
+{% endblock %}
+
+{% block style %}
+<style>
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+  th, td {
+    text-align: left;
+    padding: 8px;
+  }
+  th {
+    background-color: #4CAF50;
+    color: white;
+  }
+  tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  a {
+    text-decoration: none;
+    color: #2196F3;
+    font-weight: bold;
+  }
+  a:hover {
+    text-decoration: underline;
+  }
+  p {
+    margin-top: 20px;
+  }
+</style>
+{% endblock %}
